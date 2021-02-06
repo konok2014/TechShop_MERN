@@ -13,17 +13,17 @@ const OrderScreen = ({match}) => {
     const orderDetails=useSelector(state=>state.orderDetails)
     const{order,loading,error}=orderDetails
 
- if(!loading){
-    const addDecimals=(num)=>{
-        return (Math.round(num*100)/100).toFixed(2)
-    }
-    order.itemsPrice=addDecimals(order.orderItems.reduce(
-        (acc,item)=> acc+ item.price*item.qty,0
-    ))
-    }
-    useEffect(()=>{
+//  if(!loading){
+//     const addDecimals=(num)=>{
+//         return (Math.round(num*100)/100).toFixed(2)
+//     }
+//     order.itemsPrice=addDecimals(order.orderItems.reduce(
+//         (acc,item)=> acc+ item.price*item.qty,0
+//     ))
+//     }
+    useEffect(()``=>{
         dispatch(getOrderDetails(orderId))
-    },[])
+    },[dispatch,orderId])
 
     return loading?<Loader/>:error ? <Message variant='danger'>{error}</Message>:<>
     <h1>Order {order._id}</h1>
