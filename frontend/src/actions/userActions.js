@@ -1,4 +1,4 @@
-import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, 
+import { USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS, 
     USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../constants/userConstants"
 import axios from 'axios'
 export const login=(email,password)=>async(dispatch)=>{
@@ -12,7 +12,7 @@ export const login=(email,password)=>async(dispatch)=>{
                 'Content-Type':'application/json'
             }
         }
-        const {data}=await axios.post('api/users/login',{email,password},config)
+        const {data}=await axios.post('/api/users/login',{email,password},config)
 
         dispatch({
             type:USER_LOGIN_SUCCESS,
@@ -32,6 +32,7 @@ export const login=(email,password)=>async(dispatch)=>{
 export const logout=()=>(dispatch)=>{
     localStorage.removeItem('userInfo')
     dispatch({type:USER_LOGOUT})
+    dispatch({ type: USER_DETAILS_RESET })
 }
 
 export const register=(name,email,password)=>async(dispatch)=>{
@@ -45,7 +46,7 @@ export const register=(name,email,password)=>async(dispatch)=>{
                 'Content-Type':'application/json'
             }
         }
-        const {data}=await axios.post('api/users',{name,email,password},config)
+        const {data}=await axios.post('/api/users',{name,email,password},config)
 
         dispatch({
             type:USER_REGISTER_SUCCESS,

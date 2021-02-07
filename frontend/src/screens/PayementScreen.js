@@ -5,10 +5,10 @@ import FormContainer from '../components/FormContainer'
 import {savePaymentMethod}from '../actions/cartActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 const PaymentScreen = ({history}) => {
-    const cart=useSelector(state=>state.cart)
+    const cart=useSelector((state)=>state.cart)
     const {shippingAddress}=cart
 
-    if(!shippingAddress){
+    if(!shippingAddress.address){
         history.push('/shipping')
     }
 
@@ -27,7 +27,7 @@ const PaymentScreen = ({history}) => {
         <FormContainer>
             <CheckoutSteps step1 step2 step3 />
            <h1>Payment Method</h1>
-           <Form onSubmit={submitHandler}>
+           <Form onSubmit={submitHandler}> 
            <Form.Group>
                <Form.Label as='legend'>Select Method</Form.Label>
           
