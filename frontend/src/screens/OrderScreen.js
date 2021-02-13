@@ -6,8 +6,8 @@ import{useDispatch,useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails,payOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { getOrderDetails,payOrder,deliverOrder } from '../actions/orderActions'
+import { ORDER_PAY_RESET,ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
 const OrderScreen = ({match}) => {
     const orderId=match.params.id
@@ -16,11 +16,17 @@ const OrderScreen = ({match}) => {
 
     const dispatch=useDispatch()  
    
+    const userLogin=useSelector(state=>state.userLogin)
+    const{userInfo}=userLogin
+   
     const orderDetails=useSelector(state=>state.orderDetails)
     const{order,loading,error}=orderDetails
 
     const orderPay=useSelector(state=>state.orderPay)
     const{loading:loadingPay,success:successPay}=orderPay
+
+    const orderDeliver=useSelector(state=>state.orderDeliver)
+    const{loading:loadingDeliver,success:successDeliver}=orderDeliver
 
  if(!loading){
     const addDecimals=(num)=>{
@@ -42,8 +48,9 @@ const OrderScreen = ({match}) => {
             }
             document.body.appendChild(script)
         }
-        if(!order || successPay){
+        if(!order || successPay ||successDeliver){
         dispatch({type:ORDER_PAY_RESET})
+        dispatch({type:ORDER_DELIVER_RESET})
         dispatch(getOrderDetails(orderId))
     }else if(!order.isPaid){
         if(!window.paypal){
@@ -51,12 +58,16 @@ const OrderScreen = ({match}) => {
     }else{
         setSdkReady(true)
     }}
-    },[dispatch,orderId,successPay,order])
+    },[dispatch, orderId, successPay, order, successDeliver])
 
 
     const successPaymentHandler=(paymentResult)=>{
         console.log(paymentResult)
         dispatch(payOrder(orderId, paymentResult))
+    }
+
+    const deliverHandler=()=>{
+        dispatch(deliverOrder(order))
     }
 
     return loading?<Loader/>:error ? <Message variant='danger'>{error}</Message>:<>
@@ -157,7 +168,15 @@ const OrderScreen = ({match}) => {
                                      onSuccess={successPaymentHandler}/>
                                  )}
                              </ListGroup.Item>
-                         )}                     
+                         )}   
+                         {loadingDeliver && <Loader/>}
+                         {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                             <ListGroup.Item>
+                                <Button type='Button' className='btn btn-block' onClick={deliverHandler}>
+                                    Mark as Delivered
+                                </Button>
+                             </ListGroup.Item>
+                         )}                  
                      </ListGroup>
                  </Card>
              </Col>
