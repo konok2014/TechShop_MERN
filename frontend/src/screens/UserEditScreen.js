@@ -66,7 +66,7 @@ const UserEditScreen = ({match,history}) => {
                
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='name'>
-                    <Form.Group controlId='name'>
+                   
                         <Form.Label>
                             Name 
                         </Form.Label>
@@ -75,6 +75,7 @@ const UserEditScreen = ({match,history}) => {
       
                         </Form.Control>
                     </Form.Group>
+                    <Form.Group controlId='email'>
                         <Form.Label>
                             Email Address
                         </Form.Label>

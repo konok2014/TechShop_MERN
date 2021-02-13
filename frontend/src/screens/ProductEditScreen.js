@@ -142,7 +142,7 @@ const ProductEditScreen = ({match,history}) => {
                     
                     <Form.Group controlId='CountInStock'>
                         <Form.Label>
-                            Count In Stock
+                            CountIn Stock
                         </Form.Label>
                         <Form.Control type='text' placeholder='Enter CountInStock' value={countInStock}
                         onChange={(e)=>setCountInStock(e.target.value)}>
