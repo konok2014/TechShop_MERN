@@ -1,9 +1,10 @@
 import React from 'react'
-
+import {Route} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap' 
-import {BrowserRouter as Router,Route} from "react-router-dom"
+import {BrowserRouter as Router,} from "react-router-dom"
 import {Navbar,Nav,Form,FormControl,Button,Container, NavDropdown} from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
+import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 const Header = () => {
     const dispatch = useDispatch()
@@ -24,10 +25,7 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     
-                        <Form  inline>
-                         <FormControl type="text" placeholder="Search product..." className="mr-sm-2" />
-                         <Button variant="outline-success">Search</Button>
-                        </Form>
+                        <Route render={({history}) => <SearchBox history={history} />} />
                         <Nav className="ml-auto">
                             <LinkContainer to="/cart">
                                 <Nav.Link ><i className='fas fa-shopping-cart'> </i> Cart</Nav.Link>
