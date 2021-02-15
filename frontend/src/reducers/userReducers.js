@@ -36,7 +36,7 @@ export const userRegisterReducer=(
     }
 }
 export const userDetailsReducer=(
-    state={user:{}},action)=>{
+    state={ user: { reviews: [] }},action)=>{
     switch(action.type){
         case USER_DETAILS_REQUEST:
             return{...state, loading:true}

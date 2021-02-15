@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 // if( !mongoose.Types.ObjectId.isValid(id) )  false;
 const reviewSchema=mongoose.Schema({
     name:{type:String,required:true},
-    rating:{type:String, required:true},
+    rating:{type:Number, required:true},
     comment:{type:String, required:true},
     user:{
         type:mongoose.Schema.Types.ObjectId,
@@ -39,7 +39,7 @@ const productSchema=mongoose.Schema({
         type:String,
         required:true,
     },
-    review:[reviewSchema],
+    reviews:[reviewSchema],
     rating:{
         type:Number,
         required:true,
