@@ -12,6 +12,7 @@ import { PRODUCT_CREATE_RESET } from '../constants/productsConstant'
 const ProductListScreen = ({history,match}) => {
     const pageNumber = match.params.pageNumber || 1
     const dispatch = useDispatch()
+    
     const productList = useSelector(state =>state.productList)
     const {loading,error,products,page,pages}=productList
   

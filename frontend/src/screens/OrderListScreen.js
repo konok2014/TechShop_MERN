@@ -5,12 +5,14 @@ import{useDispatch,useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {listOrders} from '../actions/orderActions'
+import Paginate from '../components/Paginate'
 
 
-function OrderListScreen({ history }) {
+function OrderListScreen({ history,match }) {
+    const pageNumber = match.params.pageNumber || 1
     const dispatch = useDispatch()
     const orderList = useSelector(state => state.orderList)
-    const { loading, error, orders } = orderList
+    const { loading, error, orders,page,pages } = orderList
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -18,12 +20,12 @@ function OrderListScreen({ history }) {
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
-            dispatch(listOrders())
+            dispatch(listOrders(pageNumber))
         } else {
             history.push('/login')
         }
 
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, pageNumber, userInfo])
 
     
 
@@ -31,7 +33,7 @@ function OrderListScreen({ history }) {
         <>
             <h1>Orders</h1>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
-                (
+                (<>
                     <Table striped bordered hover responsive className='table-sm'>
                         <thead>
                             <tr>
@@ -73,6 +75,8 @@ function OrderListScreen({ history }) {
                             ))}
                         </tbody>
                     </Table>
+                    <Paginate pages={pages} page={page} isAdmin={true} orderPagination={true}/>
+                    </>
                 )}
         </>
     )

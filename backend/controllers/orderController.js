@@ -32,8 +32,9 @@ const addOrderItems=asyncHandler(async(req,res)=>{
 //@access Private
 
 const getOrderById=asyncHandler(async(req,res)=>{
- const order = await Order.findById(req.params.id).populate('user','name email')
 
+ const order = await Order.findById(req.params.id).populate('user','name email')
+    
  if(order){
      res.json(order)
  }else{
@@ -82,9 +83,12 @@ const getMyOrders=asyncHandler(async(req,res)=>{
 //@access Private/admin
 
 const getOrders=asyncHandler(async(req,res)=>{
-    const orders = await Order.find({}).populate('user','id name')
+    const pageSize=10
+    const page= Number(req.query.pageNumber)||1
+    const count =await Order.countDocuments()
+    const orders = await Order.find({}).populate('user','id name').limit(pageSize).skip(pageSize*(page - 1))
    
-    res.json(orders)
+    res.json({orders,page,pages:Math.ceil(count/pageSize)})
     
    })
 
@@ -94,6 +98,7 @@ const getOrders=asyncHandler(async(req,res)=>{
 //@access Private/admin
 
 const updateOrderToDelivered=asyncHandler(async(req,res)=>{
+    
     const order = await Order.findById(req.params.id)
    
     if(order){
