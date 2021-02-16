@@ -25,6 +25,7 @@ const ProductScreen = ({history,match}) => {
    
    const userLogin=useSelector(state=>state.userLogin)
    const {userInfo}=userLogin
+   
     useEffect(() => {
         if(successReviewCreate){
             setRating(0)
@@ -177,7 +178,7 @@ const ProductScreen = ({history,match}) => {
 
                         </Form.Control>
                     </Form.Group>
-                    <Button disabled={loadingProductReview} type='submit'  variant='primary'>Submit</Button>
+                    <Button disabled={loadingProductReview}  type='submit'  variant='primary'>Submit</Button>
                      
                     </Form>
                     :<Message>Please <Link to='/login'>sign in</Link> to write a review{' '}</Message>}

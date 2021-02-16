@@ -257,13 +257,18 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       dispatch({
         type: USER_DETAILS_SUCCESS, payload:data
       })
+      dispatch({ type: USER_DETAILS_RESET })
     } catch (error) {
+      const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
       dispatch({
         type: USER_UPDATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
+        payload:message,
       })
     }
   }
