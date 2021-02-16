@@ -1,11 +1,15 @@
 import React,{useEffect, useState} from 'react'
+import {Helmet} from 'react-helmet'
+import {Link} from 'react-router-dom'
 import {Container,Row,Col} from "react-bootstrap"
 import Product from "../components/Product"
 import {useDispatch,useSelector} from 'react-redux'
 import { listProducts } from '../actions/productsAction'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 import Paginate from '../components/Paginate'
 import Message from '../components/Message'
+import ProductCarousel from '../components/ProductCarousel'
 
 
 const HomeScreen = ({match}) => {
@@ -21,8 +25,11 @@ const HomeScreen = ({match}) => {
     },[dispatch, keyword,pageNumber])
    
     return (
-        <>
-            <h1>Latest Products</h1>
+        <>  
+        <Meta/>
+        {!keyword ?<ProductCarousel/>:<Link to ='/' className='btn btn-light'>
+            Go Back</Link>}
+            <h2>Latest Products</h2>
             {loading?<Loader/>:error?<Message/>:
             <>
             <Row>

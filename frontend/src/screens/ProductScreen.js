@@ -6,6 +6,7 @@ import Rating from '../components/Rating'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails,createProductReview} from '../actions/productsAction'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 import Message from '../components/Message'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productsConstant'
 
@@ -52,7 +53,9 @@ const ProductScreen = ({history,match}) => {
                Go Back
            </Link>
            {loading? <Loader/>:error? <Message variant='danger'>{error}</Message>:
-           (<><Row>
+           (<>
+           <Meta title={product.name}/>
+           <Row>
            <Col md={6}>
                <Image src={product.image} alt={product.name} fluid/>
            </Col>

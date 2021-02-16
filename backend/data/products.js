@@ -1,17 +1,5 @@
 const products = [
   {
-    name: 'Airpods Wireless Bluetooth Headphones',
-    image: '/images/airpods.jpg',
-    description:
-      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
-    brand: 'Apple',
-    category: 'Electronics',
-    price: 89.99,
-    countInStock: 10,
-    rating: 0,
-    numReviews: 0,
-  },
-  {
     name: 'iPhone 11 Pro 256GB Memory',
     image: '/images/phone.jpg',
     description:
@@ -68,6 +56,18 @@ const products = [
     category: 'Electronics',
     price: 29.99,
     countInStock: 0,
+    rating: 0,
+    numReviews: 0,
+  },
+  {
+    name: 'Airpods Wireless Bluetooth Headphones',
+    image: '/images/airpods.jpg',
+    description:
+      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 89.99,
+    countInStock: 10,
     rating: 0,
     numReviews: 0,
   },
