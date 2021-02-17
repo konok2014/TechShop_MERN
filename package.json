@@ -10,10 +10,15 @@
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder",
-    "data:destroy": "node backend/seeder -d"
+    "data:destroy": "node backend/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"cd
+    
   },
   "author": "Shahariar Konok",
   "license": "ISC",
+  "engines": {
+    "node":"14.15.4"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
@@ -22,11 +27,9 @@
     "express-async-handler": "^1.1.4",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "react-helmet": "^6.1.0"
+    "multer": "^1.4.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "concurrently": "^5.3.0",
     "nodemon": "^2.0.7"
   }
