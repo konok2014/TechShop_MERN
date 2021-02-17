@@ -1,7 +1,6 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap' 
-import {BrowserRouter as Router,} from "react-router-dom"
 import {Navbar,Nav,Form,FormControl,Button,Container, NavDropdown} from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBox from './SearchBox'
