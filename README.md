@@ -2,6 +2,8 @@
 
 > eCommerce platform built with the MERN stack & Redux.
 
+### Link
+> https://techshopbykonok.herokuapp.com/
 
 ![screenshot](https://github.com/konok2014/TechShop_MERN/blob/main/uploads/Screenshot%20(92).png)
 
